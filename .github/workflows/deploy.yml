@@ -45,4 +45,6 @@ jobs:
             -e "ssh -p ${{ secrets.VPS_PORT }}" \
             dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:${{ secrets.VPS_PATH }}/
 
-          $SSH "sudo nginx -t && sudo systemctl reload nginx || sudo systemctl restart nginx"
+          # nginx reload requires sudo privileges; deployment completed via rsync.
+          # Reload should be handled manually or via a root-owned script/cron.
+          echo "Deploy upload complete; nginx reload skipped (no sudo for user)."
